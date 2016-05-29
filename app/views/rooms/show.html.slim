@@ -1,0 +1,10 @@
+h1 ChatRoom for #{@candidate.email}
+
+.messages
+  - @candidate.messages.each do |message|
+    = render message
+
+
+form
+  label You say: <br>
+  input type="text" data-behavior="room_chanel"

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  mount ActionCable.server => '/cable'
+
+  get 'rooms/:id' => 'rooms#show', as: :chat
+
   get 'home/index'
 
   devise_for :users

@@ -1,2 +1,13 @@
-h1 Home#index
-p Find me in app/views/home/index.html.slim
+h1 Home page
+
+p
+  - if user_signed_in? && current_user.hr?
+    - @users.each do |user|
+      - unless user.id == current_user.id
+        p
+          = "#{user.email} "
+          = link_to "create hr from this user", "#"
+          = " or "
+          = link_to "go chat", "#"
+  - else
+    p Go to chat!
