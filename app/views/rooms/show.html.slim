@@ -1,7 +1,10 @@
 h1 ChatRoom for #{@candidate.email}
 
+= hidden_field_tag :user, current_user.id
+= hidden_field_tag :room, @candidate.id
+
 .messages
-  - @candidate.messages.each do |message|
+  - @candidate.room_messages.each do |message|
     = render message
 
 

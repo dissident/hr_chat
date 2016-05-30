@@ -8,7 +8,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :messages
+  has_many :room_messages, foreign_key: 'room_id', class_name: 'Message'
+  has_many :messages, foreign_key: 'owner_id'
 
   def hr?
     role == HR_ROLE
