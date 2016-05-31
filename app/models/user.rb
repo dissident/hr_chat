@@ -11,8 +11,15 @@ class User < ApplicationRecord
   has_many :room_messages, foreign_key: 'room_id', class_name: 'Message'
   has_many :messages, foreign_key: 'owner_id'
 
+
   def hr?
     role == HR_ROLE
+  end
+
+  def who_can_enter
+    result = allowed.to_a
+    result << opener
+    result << id
   end
 
 end

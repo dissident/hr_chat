@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   get 'rooms/:id' => 'rooms#show', as: :chat
+  get 'create_room/:id' => 'home#create_room'
+  get 'create_hr/:id' => 'home#create_hr'
 
   get 'home/index'
 

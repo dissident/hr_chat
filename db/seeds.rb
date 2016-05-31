@@ -18,5 +18,30 @@ User.create([
   {
     email: 'candidate@example.com',
     password: 'password'
+  },
+  {
+    email: 'candidate2@example.com',
+    password: 'password'
+  },
+  {
+    email: 'candidate3@example.com',
+    password: 'password'
+  },
+  {
+    email: 'candidate4@example.com',
+    password: 'password'
+  },
+  {
+    email: 'candidate5@example.com',
+    password: 'password'
+  },
+  {
+    email: 'candidate6@example.com',
+    password: 'password'
+  },
+  {
+    email: 'hr2@example.com',
+    password: 'password',
+    role: User::HR_ROLE
   }
 ])

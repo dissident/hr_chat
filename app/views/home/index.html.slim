@@ -2,12 +2,27 @@ h1 Home page
 
 p
   - if user_signed_in? && current_user.hr?
-    - @users.each do |user|
-      - unless user.id == current_user.id
-        p
-          = "#{user.email} "
-          = link_to "create hr from this user", "#"
-          = " or "
-          = link_to "go chat", "#"
-  - else
-    p Go to chat!
+    h2 Clean users
+    - @clean_users.each do |user|
+      p
+        = "#{user.email} "
+        = link_to "create hr from this user", "/create_hr/#{user.id}"
+        = " or "
+        = link_to "create room for chat them", "/create_room/#{user.id}"
+
+    h2 Other hrs
+    - @hrs.each do |hr|
+      p = hr.email
+
+    h2 Open rooms
+    - @open_rooms.each do |room|
+      p
+        = "open room for user #{room.email} "
+        = link_to "go chat", chat_path(room.id)
+
+
+
+  - elsif user_signed_in? && @open_rooms.include?(current_user)
+    = link_to "Go to your room", chat_path(current_user)
+
+
