@@ -1,31 +1,33 @@
 ready = ->
 
-  user_id = $("#user").val()
-  room_id = $("#room").val()
+  if window.location.pathname.split( '/' )[1] == 'rooms'
 
-  App.room = App.cable.subscriptions.create { channel: "RoomChannel", room: room_id, user: user_id },
+    user_id = $("#user").val()
+    room_id = $("#room").val()
 
-    connected: ->
-      # Called when the subscription is ready for use on the server
+    App.room = App.cable.subscriptions.create { channel: "RoomChannel", room: room_id, user: user_id },
 
-    disconnected: ->
-      # Called when the subscription has been terminated by the server
+      connected: ->
+        # Called when the subscription is ready for use on the server
 
-    received: (data) ->
-      unless data['error']? && data['error'].length > 0
-        $('.messages').append "<p>#{data['message']}</p>"
-      else
-        console.log(data['error'])
+      disconnected: ->
+        # Called when the subscription has been terminated by the server
 
-    speak: (message) ->
-      @perform 'speak', message: message
+      received: (data) ->
+        unless data['error']? && data['error'].length > 0
+          $('.messages').append data['message']
+        else
+          console.log(data['error'])
+
+      speak: (message) ->
+        @perform 'speak', message: message
 
 
-  $(document).on 'keypress', '#chat-speak', (event) ->
-    if event.keyCode is 13
-      App.room.speak(event.target.value)
-      event.target.value = ""
-      event.preventDefault()
+    $(document).on 'keypress', '#chat-speak', (event) ->
+      if event.keyCode is 13
+        App.room.speak(event.target.value)
+        event.target.value = ""
+        event.preventDefault()
 
 
 $(document).ready(ready)

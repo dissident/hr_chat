@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  CANDIATE_ROLE=0
+  CANDIDATE_ROLE=0
   HR_ROLE=1
 
   # Include default devise modules. Others available are:
