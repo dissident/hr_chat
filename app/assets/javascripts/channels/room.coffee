@@ -22,7 +22,7 @@ ready = ->
       speak: (message) ->
         @perform 'speak', message: message
 
-
+    $('#chat-speak').off 'keypress'
     $(document).on 'keypress', '#chat-speak', (event) ->
       if event.keyCode is 13
         App.room.speak(event.target.value)
@@ -30,5 +30,4 @@ ready = ->
         event.preventDefault()
 
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).on('turbolinks:load', ready)

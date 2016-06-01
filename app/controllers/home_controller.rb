@@ -4,8 +4,8 @@ class HomeController < ApplicationController
 
   def index
     if user_signed_in? && current_user.hr?
-      @clean_users = User.where('role = ? and open = ?', User::CANDIDATE_ROLE, false)
-      @hrs = User.where(role: User::HR_ROLE).where.not(id: current_user.id)
+      @clean_users = User.clean_users
+      @hrs = User.hrs(current_user.id)
     end
     @open_rooms = User.where(open: true)
   end

@@ -10,6 +10,7 @@ html
     p.alert = alert
 
     - if user_signed_in?
+      = hidden_field_tag :user, current_user.id
       p Hello #{ current_user.email }
       = link_to "Sign Out", destroy_user_session_path, method: :delete
     - else

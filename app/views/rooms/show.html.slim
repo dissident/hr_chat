@@ -1,8 +1,16 @@
 h1 ChatRoom for #{@candidate.email}
 
-= hidden_field_tag :user, current_user.id
 = hidden_field_tag :room, @candidate.id
 
+.hrs
+  - if @hrs.any? && @candidate.opener == current_user.id
+    - @hrs.each do |hr|
+      - unless @candidate.allowed.to_a.include?(hr.id)
+        = link_to "invite #{hr.email}", "", class: "invite-link", data: { id: hr.id}
+
+br
+
+h2 Chat
 .messages
   - @candidate.room_messages.each do |message|
     = render message
